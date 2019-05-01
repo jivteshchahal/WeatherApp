@@ -1,11 +1,13 @@
 package com.example.weatherapp.bean;
 
+import com.google.gson.JsonObject;
+
 import java.util.List;
 
 public class WeatherBean {
     List<WeatherDetailBean> weather;
-    List<MainBean> mainBeanList;
-    List<WindBean> windBeanList;
+    JsonObject main;
+    JsonObject wind;
     String name;
 
 
@@ -17,20 +19,20 @@ public class WeatherBean {
         this.weather = weather;
     }
 
-    public List<MainBean> getMainBeanList() {
-        return mainBeanList;
+    public JsonObject getMain() {
+        return main;
     }
 
-    public void setMainBeanList(List<MainBean> mainBeanList) {
-        this.mainBeanList = mainBeanList;
+    public void setMain(JsonObject main) {
+        this.main = main;
     }
 
-    public List<WindBean> getWindBeanList() {
-        return windBeanList;
+    public JsonObject getWind() {
+        return wind;
     }
 
-    public void setWindBeanList(List<WindBean> windBeanList) {
-        this.windBeanList = windBeanList;
+    public void setWind(JsonObject wind) {
+        this.wind = wind;
     }
 
     public String getName() {

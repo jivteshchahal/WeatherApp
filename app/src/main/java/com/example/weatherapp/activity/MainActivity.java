@@ -28,7 +28,11 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
@@ -36,7 +40,7 @@ import java.util.Map;
 public class MainActivity extends AppCompatActivity {
     Spinner spinner;
     Button refreshButton;
-    TextView txtCity, txtUpdatedTime, txtWeather, txtTemprature, txtWind;
+    TextView txtCity, txtUpdatedTime, txtWeather, txtTemp, txtWind;
     WeatherBean myModelList;
     Gson gson;
     Type listType;
@@ -49,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
         txtCity = findViewById(R.id.txtcity);
         txtUpdatedTime = findViewById(R.id.txtDayAndTime);
         txtWeather = findViewById(R.id.txtWeather);
-        txtTemprature = findViewById(R.id.txtTemp);
+        txtTemp = findViewById(R.id.txtTemp);
         txtWind = findViewById(R.id.txtWindSpeed);
 
         List<String> cityList =  new ArrayList<>();
@@ -78,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
     }
     void volley(final String place) {
 
-        String url = "http://api.openweathermap.org/data/2.5/weather?q="+place+"&APPID=172c74216a3ffe8dfbbdec6565a9dac7";
+        String url = "http://api.openweathermap.org/data/2.5/weather?q="+place+"&APPID=172c74216a3ffe8dfbbdec6565a9dac7&units=metric";
 
         final ProgressDialog loading = ProgressDialog.show(this, "", "Please wait...", false, false);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>(){
@@ -89,16 +93,18 @@ public class MainActivity extends AppCompatActivity {
                 gson = new Gson();
                 listType = new TypeToken<WeatherBean>() {
                 }.getType();
-
+//                Date currentTime = Calendar.getInstance().getTime();
+                DateFormat df = new SimpleDateFormat("EEEE h:mm a");
+                String date = df.format(Calendar.getInstance().getTime());
+//                Log.e("Time",date+"");
                 myModelList = gson.fromJson(response, listType);
                 if (myModelList.getWeather().size() != 0) {
                     for (int k = 0; k < myModelList.getWeather().size(); k++) {
-                        Log.e("NNNNNNNNNNN", myModelList.getWeather().get(k).getMain() + "");
                         txtCity.setText(myModelList.getName());
-                        txtUpdatedTime.setText("");
+                        txtUpdatedTime.setText(date);
                         txtWeather.setText(myModelList.getWeather().get(k).getDescription());
-//                        txtTemprature.setText(myModelList.getMainBeanList().get(k).getCurrentTemp());
-//                        txtWind.setText(myModelList.getWindBeanList().get(k).getSpeed()+"km/h");
+                        txtTemp.setText(myModelList.getMain().get("temp")+"\u00b0 C");
+                        txtWind.setText(myModelList.getWind().get("speed")+"km/h");
                     }
                 }
                 else{
