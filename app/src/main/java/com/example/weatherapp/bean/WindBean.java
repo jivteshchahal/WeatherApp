@@ -1,6 +1,6 @@
 package com.example.weatherapp.bean;
 
-class WindBean {
+public  class WindBean {
     float speed, deg;
 
     public float getSpeed() {

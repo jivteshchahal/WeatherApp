@@ -44,6 +44,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:id="@+id/txtcity"
                 android:layout_column="1"
                 android:layout_margin="1dp"
                 android:background="#FFFFFF"
@@ -59,7 +60,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Weather"
+                android:text="Updated Time"
                 android:layout_margin="1dp"
                 android:layout_column="0"
                 android:background="#FFFFFF"/>
@@ -67,6 +68,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:id="@+id/txtDayAndTime"
                 android:text="Thursday 11:00AM"
                 android:layout_margin="1dp"
                 android:layout_column="1"
@@ -88,6 +90,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:id="@+id/txtWeather"
                 android:text="Mostly Cloudy"
                 android:layout_margin="1dp"
                 android:layout_column="1"
@@ -109,6 +112,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:id="@+id/txtTemp"
                 android:text="9 C"
                 android:layout_margin="1dp"
                 android:layout_column="1"
@@ -130,6 +134,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:id="@+id/txtWindSpeed"
                 android:text="30km/h"
                 android:layout_margin="1dp"
                 android:layout_column="1"

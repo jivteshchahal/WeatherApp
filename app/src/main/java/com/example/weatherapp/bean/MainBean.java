@@ -1,6 +1,6 @@
 package com.example.weatherapp.bean;
 
-class MainBean {
+public class MainBean {
     String currentTemp, minTemp, maxTemp;
 
     public String getCurrentTemp() {
