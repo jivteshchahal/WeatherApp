@@ -5,22 +5,28 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".activity.MainActivity">
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Weather App"
+    android:textSize="@android:dimen/app_icon_size"/>
 
     <Spinner
         android:id="@+id/spinnerCitySelect"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        />
+        android:layout_height="wrap_content" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:id="@+id/btnRefresh"
         android:text="Refresh"/>
 
     <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@android:dimen/app_icon_size"
         android:gravity="center">
 
         <TableRow
@@ -95,7 +101,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Temperature"
+                android:text="Temperature   "
                 android:layout_margin="1dp"
                 android:layout_column="0"
                 android:background="#FFFFFF"/>
