@@ -20,6 +20,7 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+        /* Creating tables on install of app */
         sharedpreferences = getSharedPreferences("tables", MODE_PRIVATE);
         Map m = sharedpreferences.getAll();
         if (m.size() == 0) {
@@ -28,6 +29,7 @@ public class SplashActivity extends AppCompatActivity {
             editor.commit();
             new SqlLiteServices(SplashActivity.this).createTables();
         }
+
         final ProgressDialog loading = ProgressDialog.show(SplashActivity.this, "", "Please wait...", false, false);
         new Handler().postDelayed(new Runnable() {
             @Override

@@ -12,18 +12,22 @@ public class WeatherBean {
 
 
     public List<WeatherDetailBean> getWeather() {
+
         return weather;
     }
 
     public void setWeather(List<WeatherDetailBean> weather) {
+
         this.weather = weather;
     }
 
     public JsonObject getMain() {
+
         return main;
     }
 
-    public void setMain(JsonObject main) {
+    public void setMain(JsonObject main)
+    {
         this.main = main;
     }
 
@@ -36,10 +40,12 @@ public class WeatherBean {
     }
 
     public String getName() {
+
         return name;
     }
 
     public void setName(String name) {
+
         this.name = name;
     }
 }

@@ -1,7 +1,7 @@
 package com.example.weatherapp.bean;
 
 public class WeatherDetailBean {
-    String main, description, icon;
+    String main, description;
 
     public String getDescription() {
         return description;
