@@ -46,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
     WeatherBean myModelList;
     Gson gson;
     Type listType;
+    String city="";
     MainBean mainBean;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,16 +72,24 @@ public class MainActivity extends AppCompatActivity {
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(MainActivity.this, parent.getSelectedItem().toString(),Toast.LENGTH_SHORT).show();
-                Log.e("VVVVVVVVVVVV",parent.getSelectedItem().toString());
-                volley(parent.getSelectedItem().toString());
+                city =parent.getSelectedItem().toString();
+                Toast.makeText(MainActivity.this, city,Toast.LENGTH_SHORT).show();
+                volley(city);
                 List<MainBean> mainBeanList= new ArrayList<>();
                 mainBeanList = new SqlLiteServices(MainActivity.this).getAllWeatherData();
-                    txtCity.setText(parent.getSelectedItem().toString());
-                    txtTemp.setText(mainBeanList.get(position).getTemp());
-                    txtUpdatedTime.setText(mainBeanList.get(position).getTime());
-                    txtWeather.setText(mainBeanList.get(position).getWeather());
-                    txtWind.setText(mainBeanList.get(position).getSpeed());
+                for(int i=0; i<mainBeanList.size(); i++){
+
+                    if (mainBeanList.get(i).getCity().equalsIgnoreCase(city)){
+                        Log.e("Namemnm", mainBeanList.size()+"");
+                        Log.e("VVVVVVVVVVVV",mainBeanList.get(i).getCity());
+                        txtCity.setText(mainBeanList.get(i).getCity());
+                        txtTemp.setText(mainBeanList.get(i).getTemp());
+                        txtUpdatedTime.setText(mainBeanList.get(i).getTime());
+                        txtWeather.setText(mainBeanList.get(i).getWeather());
+                        txtWind.setText(mainBeanList.get(i).getSpeed());
+                    }
+                }
+
             }
 
             @Override
@@ -111,14 +120,13 @@ public class MainActivity extends AppCompatActivity {
                 if (myModelList.getWeather().size() != 0) {
 //                    new SqlLiteServices(MainActivity.this).delete();
                     for (int k = 0; k < myModelList.getWeather().size(); k++) {
-                        mainBean.setCity(myModelList.getName());
-                        Log.e("Name", myModelList.getName());
+                        mainBean.setCity(city);
                         mainBean.setTime(date);
                         mainBean.setWeather(myModelList.getWeather().get(k).getDescription());
                         mainBean.setTemp(myModelList.getMain().get("temp").toString());
                         mainBean.setSpeed(myModelList.getWind().get("speed").toString());
                     }
-                    new SqlLiteServices(MainActivity.this).addUpdatedData(mainBean);
+                    new SqlLiteServices(MainActivity.this).insertOrUpdate(mainBean);
                 }
                 else{
                     Log.e("NNNNNNNNNNN", "Errorrrrrrrrrrrr");

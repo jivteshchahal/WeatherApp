@@ -79,6 +79,43 @@ public class SqlLiteServices {
             Log.e("Database","didn't Inserted Successfully");
         }
     }
+//    private int getCity(MainBean mainBean){
+//        SQLiteDatabase database = context.openOrCreateDatabase("WeatherApp.db", SQLiteDatabase.CREATE_IF_NECESSARY, null);
+//        Cursor c = database.query("tblWeatherReport",new String[]{"id"}, "city =? AND weather=?",new String[]{mainBean.getTime(),mainBean.getWeather()},null,null,null,null);
+//        if (c.moveToFirst()) //if the row exist then return the id
+//            return c.getInt(c.getColumnIndex("city"));
+//        return -1;
+//    }
+    public void insertOrUpdate(MainBean main){
+        SQLiteDatabase database = context.openOrCreateDatabase("WeatherApp.db", SQLiteDatabase.CREATE_IF_NECESSARY, null);
+
+        ContentValues values = new ContentValues();
+        values.put("city", main.getCity());
+        values.put("time", main.getTime());
+        values.put("weather", main.getWeather());
+        values.put("temperature", main.getTemp());
+        values.put("speed", main.getSpeed());
+        Log.e("city from sql",main.getCity());
+        int u = database.update("tblWeatherReport", values, "city=?", new String[]{main.getCity()});
+        Log.e("update from sql",u+"");
+
+        if (u == 0) {
+            database.insertWithOnConflict("tblWeatherReport", null, values, SQLiteDatabase.CONFLICT_REPLACE);
+            Log.e("Database","inserted Successfully");
+        }
+        else{
+            Log.e("Database","updated Successfully");
+        }
+//        int id = getCity(main);
+//        if(id==-1) {
+//            database.insert("tblWeatherReport", null, values);
+//            Log.e("Database","Inserted Successfully");
+//        }
+//        else {
+//            database.update("tblWeatherReport", values, "city=?", new String[]{main.getCity()});
+//            Log.e("Database","Updated Successfully");
+//        }
+    }
 
     public void delete() {
         SQLiteDatabase database = context.openOrCreateDatabase("WeatherApp.db", SQLiteDatabase.CREATE_IF_NECESSARY, null);
