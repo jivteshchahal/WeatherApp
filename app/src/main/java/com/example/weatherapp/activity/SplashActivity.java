@@ -7,6 +7,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
 
 import com.example.weatherapp.R;
 import com.example.weatherapp.database.SqlLiteServices;
@@ -16,10 +18,12 @@ import java.util.Map;
 public class SplashActivity extends AppCompatActivity {
     SharedPreferences sharedpreferences;
     SharedPreferences.Editor editor;
+    ImageView imageView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+//        imageView = findViewById(R.id.imageView);
         /* Creating tables on install of app */
         sharedpreferences = getSharedPreferences("tables", MODE_PRIVATE);
         Map m = sharedpreferences.getAll();
@@ -29,6 +33,7 @@ public class SplashActivity extends AppCompatActivity {
             editor.commit();
             new SqlLiteServices(SplashActivity.this).createTables();
         }
+//        imageView.setImageResource(R.mipmap.ic_launcher);
 
         final ProgressDialog loading = ProgressDialog.show(SplashActivity.this, "", "Please wait...", false, false);
         new Handler().postDelayed(new Runnable() {

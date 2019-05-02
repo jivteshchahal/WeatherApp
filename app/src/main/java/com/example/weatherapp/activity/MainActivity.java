@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
 
         /* Spinner Setup passing a list which can be increased when required */
         List<String> cityList =  new ArrayList<>();
-        cityList.add("Select City");
+        cityList.add("Please Select a City");
         cityList.add("Sydney");
         cityList.add("Melbourne");
         cityList.add("Wollongong");
@@ -79,26 +79,28 @@ public class MainActivity extends AppCompatActivity {
                 /* selected spinner item */
                 city =parent.getSelectedItem().toString();
                 /*Checking if internet is connected. If yes then live data is shown. If not then data which was last received from database is displayed*/
-                if(isInternetOn()){
-                    //getting data from Server
-                    volley(city);
-                }else {
-                    /* getting data from database */
-                    List<MainBean> mainBeanList;
-                    try{
-                        mainBeanList = new SqlLiteServices(MainActivity.this).getAllWeatherData();
-                    for (int i = 0; i < mainBeanList.size(); i++) {
-                        if (mainBeanList.get(i).getCity().equalsIgnoreCase(city)) {
-                            Log.e("Namemnm", mainBeanList.size() + "");
-                            txtCity.setText(city);
-                            txtTemp.setText(mainBeanList.get(i).getTemp()+"° C");
-                            txtUpdatedTime.setText(mainBeanList.get(i).getTime());
-                            txtWeather.setText(mainBeanList.get(i).getWeather());
-                            txtWind.setText(mainBeanList.get(i).getSpeed()+"km/h");
+                if(!city.equalsIgnoreCase("Please Select a City")){
+                    if(isInternetOn()){
+                        //getting data from Server
+                        volley(city);
+                    }else {
+                        /* getting data from database */
+                        List<MainBean> mainBeanList;
+                        try{
+                            mainBeanList = new SqlLiteServices(MainActivity.this).getAllWeatherData();
+                            for (int i = 0; i < mainBeanList.size(); i++) {
+                                if (mainBeanList.get(i).getCity().equalsIgnoreCase(city)) {
+                                    Log.e("Namemnm", mainBeanList.size() + "");
+                                    txtCity.setText(city);
+                                    txtTemp.setText(mainBeanList.get(i).getTemp()+"° C");
+                                    txtUpdatedTime.setText(mainBeanList.get(i).getTime());
+                                    txtWeather.setText(mainBeanList.get(i).getWeather());
+                                    txtWind.setText(mainBeanList.get(i).getSpeed()+"km/h");
+                                }
+                            }
+                        }catch (Exception e){
+                            Log.e("Exception in database", e.getLocalizedMessage());
                         }
-                    }
-                }catch (Exception e){
-                        Log.e("Exception in database", e.getLocalizedMessage());
                     }
                 }
             }
@@ -151,13 +153,13 @@ public class MainActivity extends AppCompatActivity {
                         mainBean.setTime(date);
                         mainBean.setWeather(weatherBean.getWeather().get(k).getDescription());
                         mainBean.setTemp(weatherBean.getMain().get("temp").toString());
-                        mainBean.setSpeed(weatherBean.getWind().get("speed").toString()+"km/h");
+                        mainBean.setSpeed(weatherBean.getWind().get("speed").toString());
                         /* live data display */
                         txtCity.setText(city);
-                        txtTemp.setText(weatherBean.getMain().get("temp").toString());
+                        txtTemp.setText(weatherBean.getMain().get("temp").toString()+"° C");
                         txtUpdatedTime.setText(date);
                         txtWeather.setText(weatherBean.getWeather().get(k).getDescription());
-                        txtWind.setText(weatherBean.getWind().get("speed").toString()+"° C");
+                        txtWind.setText(weatherBean.getWind().get("speed").toString()+"km/h");
                     }
                     /* Storing data for offline display in SqlLite Database */
                     new SqlLiteServices(MainActivity.this).insertOrUpdate(mainBean);
@@ -168,12 +170,12 @@ public class MainActivity extends AppCompatActivity {
             }
         }, /* error */
                 new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                loading.cancel();
-                Log.e("error in volley", error.toString());
-            }
-        });
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        loading.cancel();
+                        Log.e("error in volley", error.toString());
+                    }
+                });
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(stringRequest);
     }
