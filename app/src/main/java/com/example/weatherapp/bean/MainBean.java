@@ -2,7 +2,7 @@ package com.example.weatherapp.bean;
 
 public class MainBean {
     String temp;
-    String temp_min;
+    String city, time, speed, weather;
 
     public String getTemp() {
         return temp;
@@ -12,22 +12,35 @@ public class MainBean {
         this.temp = temp;
     }
 
-    public String getTemp_min() {
-        return temp_min;
+    public String getCity() {
+        return city;
     }
 
-    public void setTemp_min(String temp_min) {
-        this.temp_min = temp_min;
+    public void setCity(String city) {
+        this.city = city;
     }
 
-    public String getTemp_max() {
-        return temp_max;
+    public String getTime() {
+        return time;
     }
 
-    public void setTemp_max(String temp_max) {
-        this.temp_max = temp_max;
+    public void setTime(String time) {
+        this.time = time;
     }
 
-    String temp_max;
+    public String getSpeed() {
+        return speed;
+    }
 
+    public void setSpeed(String speed) {
+        this.speed = speed;
+    }
+
+    public String getWeather() {
+        return weather;
+    }
+
+    public void setWeather(String weather) {
+        this.weather = weather;
+    }
 }

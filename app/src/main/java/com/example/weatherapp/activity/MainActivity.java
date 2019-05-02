@@ -23,7 +23,9 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.weatherapp.R;
+import com.example.weatherapp.bean.MainBean;
 import com.example.weatherapp.bean.WeatherBean;
+import com.example.weatherapp.database.SqlLiteServices;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -44,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
     WeatherBean myModelList;
     Gson gson;
     Type listType;
+    MainBean mainBean;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,12 +74,18 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, parent.getSelectedItem().toString(),Toast.LENGTH_SHORT).show();
                 Log.e("VVVVVVVVVVVV",parent.getSelectedItem().toString());
                 volley(parent.getSelectedItem().toString());
-
+                List<MainBean> mainBeanList= new ArrayList<>();
+                mainBeanList = new SqlLiteServices(MainActivity.this).getAllWeatherData();
+                    txtCity.setText(parent.getSelectedItem().toString());
+                    txtTemp.setText(mainBeanList.get(position).getTemp());
+                    txtUpdatedTime.setText(mainBeanList.get(position).getTime());
+                    txtWeather.setText(mainBeanList.get(position).getWeather());
+                    txtWind.setText(mainBeanList.get(position).getSpeed());
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-
+//° C
             }
         });
     }
@@ -98,14 +107,18 @@ public class MainActivity extends AppCompatActivity {
                 String date = df.format(Calendar.getInstance().getTime());
 //                Log.e("Time",date+"");
                 myModelList = gson.fromJson(response, listType);
+                mainBean = new MainBean();
                 if (myModelList.getWeather().size() != 0) {
+//                    new SqlLiteServices(MainActivity.this).delete();
                     for (int k = 0; k < myModelList.getWeather().size(); k++) {
-                        txtCity.setText(myModelList.getName());
-                        txtUpdatedTime.setText(date);
-                        txtWeather.setText(myModelList.getWeather().get(k).getDescription());
-                        txtTemp.setText(myModelList.getMain().get("temp")+"\u00b0 C");
-                        txtWind.setText(myModelList.getWind().get("speed")+"km/h");
+                        mainBean.setCity(myModelList.getName());
+                        Log.e("Name", myModelList.getName());
+                        mainBean.setTime(date);
+                        mainBean.setWeather(myModelList.getWeather().get(k).getDescription());
+                        mainBean.setTemp(myModelList.getMain().get("temp").toString());
+                        mainBean.setSpeed(myModelList.getWind().get("speed").toString());
                     }
+                    new SqlLiteServices(MainActivity.this).addUpdatedData(mainBean);
                 }
                 else{
                     Log.e("NNNNNNNNNNN", "Errorrrrrrrrrrrr");
