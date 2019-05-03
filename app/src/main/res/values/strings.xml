@@ -1,5 +1,36 @@
 <resources>
     <string name="app_name">Weather App</string>
-    <string name="url">http://api.openweathermap.org/data/2.5/weather?q=</string>
-    <string name="apiWeather">APPID=172c74216a3ffe8dfbbdec6565a9dac7</string>
+    <string name="urlHttp">http</string>
+    <string name="urlDomain">api.openweathermap.org</string>
+    <string name="urlData">data</string>
+    <string name="urlVer">2.5</string>
+    <string name="urlWea">weather</string>
+    <string name="apiUnits">units</string>
+    <string name="apiMetrics">metric</string>
+    <string name="apiQuery">q</string>
+    <string name="urlApistart">APPID</string>
+    <string name="urlApiWeatherKey">172c74216a3ffe8dfbbdec6565a9dac7</string>
+    <string name="spVal">val</string>
+    <string name="spValValue">1</string>
+    <string name="apiRefSpeed">speed</string>
+    <string name="apiRefTemperature">temp</string>
+    <string name="volleyError">error in volley</string>
+    <string name="volleyErrortag">Error in response</string>
+    <string name="volleyErrormsg">Error in format</string>
+    <string name="pbMsg">Loading</string>
+    <string name="none" />
+    <string name="dateFormat">EEEE h:mm a</string>
+    <string name="sbMsg">No internet connection to get live data</string>
+    <string name="dbExeption">Exception in database</string>
+    <string name="degreeC">° C</string>
+    <string name="kmperHour">km/h</string>
+    <string name="citySelect">Please Select a City</string>
+    <string name="dbName">WeatherApp.db</string>
+    <string name="dbTable">tblWeatherReport</string>
+    <string-array name="cityArray">
+        <item>Select a City</item>
+        <item>Sydney</item>
+        <item>Melbourne</item>
+        <item>Wollongong</item>
+    </string-array>
 </resources>

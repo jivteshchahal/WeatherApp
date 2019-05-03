@@ -2,6 +2,8 @@ package com.example.weatherapp.bean;
 
 import com.google.gson.JsonObject;
 
+import org.json.JSONObject;
+
 import java.util.List;
 
 public class WeatherBean {
@@ -22,12 +24,10 @@ public class WeatherBean {
     }
 
     public JsonObject getMain() {
-
         return main;
     }
 
-    public void setMain(JsonObject main)
-    {
+    public void setMain(JsonObject main) {
         this.main = main;
     }
 
