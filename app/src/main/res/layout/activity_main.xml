@@ -20,11 +20,13 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="horizontal">
     <Spinner
         android:id="@+id/spinnerCitySelect"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        />
 
     <Button
         android:layout_width="wrap_content"
@@ -35,9 +37,14 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="horizontal">
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            />
     <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@android:dimen/app_icon_size"
         android:gravity="center">
@@ -152,12 +159,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/txtWindSpeed"
-                android:text="30km/h"
+                android:text="30\u0020km/h"
                 android:layout_margin="1dp"
                 android:layout_column="1"
                 android:background="@drawable/tvborder"
                 />
         </TableRow>
     </TableLayout>
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            />
     </LinearLayout>
 </LinearLayout>

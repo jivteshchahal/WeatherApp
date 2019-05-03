@@ -13,6 +13,9 @@
     <string name="spVal">val</string>
     <string name="spValValue">1</string>
     <string name="apiRefSpeed">speed</string>
+    <string name="apiRefWeather">weather</string>
+    <string name="apiRefTime">time</string>
+    <string name="apiRefCity">city</string>
     <string name="apiRefTemperature">temp</string>
     <string name="volleyError">error in volley</string>
     <string name="volleyErrortag">Error in response</string>
@@ -23,10 +26,17 @@
     <string name="sbMsg">No internet connection to get live data</string>
     <string name="dbExeption">Exception in database</string>
     <string name="degreeC">° C</string>
-    <string name="kmperHour">km/h</string>
-    <string name="citySelect">Please Select a City</string>
+    <string name="kmperHour">\u0020km/h</string>
+    <string name="citySelect">Select a City</string>
     <string name="dbName">WeatherApp.db</string>
     <string name="dbTable">tblWeatherReport</string>
+    <string name="dbRefSpeed">speed</string>
+    <string name="dbRefWeather">weather</string>
+    <string name="dbRefTime">time</string>
+    <string name="dbRefCity">city</string>
+    <string name="dbRefTemperature">temperature</string>
+    <string name="sbOffline">Offline data not available</string>
+    <string name="sbSelectCity">Please select a city from the menu</string>
     <string-array name="cityArray">
         <item>Select a City</item>
         <item>Sydney</item>

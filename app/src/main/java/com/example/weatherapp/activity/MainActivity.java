@@ -71,11 +71,14 @@ public class MainActivity extends AppCompatActivity {
                 city = parent.getSelectedItem().toString();
 
                 if (!city.equalsIgnoreCase(getString(R.string.citySelect))) {
-                    showData();
+                    showData(view);
+                }else if(city.equalsIgnoreCase(getString(R.string.citySelect))){
+                    Snackbar snackbar = Snackbar.make(view, getString(R.string.sbSelectCity), Snackbar.LENGTH_SHORT);
+                    snackbar.show();
                 }
             }
 
-            private void showData() {
+            private void showData(View view) {
                 if (isNetworkAvailable()) {
                     volley(city);
 
@@ -86,14 +89,19 @@ public class MainActivity extends AppCompatActivity {
                     List<MainBean> mainBeanList;
                     try {
                         mainBeanList = new SqlLiteServices(MainActivity.this).getAllWeatherData();
-                        for (int index = 0; index < mainBeanList.size(); index++)
-                            if (mainBeanList.get(index).getCity().equalsIgnoreCase(city)) {
-                                txtCity.setText(city);
-                                txtTemp.setText(mainBeanList.get(index).getTemp() + getString(R.string.degreeC));
-                                txtUpdatedTime.setText(mainBeanList.get(index).getTime());
-                                txtWeather.setText(mainBeanList.get(index).getWeather());
-                                txtWind.setText(mainBeanList.get(index).getSpeed() + getString(R.string.kmperHour));
-                            }
+                        if(mainBeanList.size() >1) {
+                            for (int index = 0; index < mainBeanList.size(); index++)
+                                if (mainBeanList.get(index).getCity().equalsIgnoreCase(city)) {
+                                    txtCity.setText(city);
+                                    txtTemp.setText(mainBeanList.get(index).getTemp() + getString(R.string.degreeC));
+                                    txtUpdatedTime.setText(mainBeanList.get(index).getTime());
+                                    txtWeather.setText(mainBeanList.get(index).getWeather());
+                                    txtWind.setText(mainBeanList.get(index).getSpeed() + getString(R.string.kmperHour));
+                                }
+                        }else{
+                            Snackbar snackbar = Snackbar.make(view, getString(R.string.sbOffline), Snackbar.LENGTH_LONG);
+                            snackbar.show();
+                        }
                     } catch (Exception e) {
                         Log.e(getString(R.string.dbExeption), e.getLocalizedMessage());
                     }
