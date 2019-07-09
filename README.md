@@ -35,35 +35,8 @@ App Submission
 •	App category: Weather 
 •	Contact Email: jivteshchahal@gmail.com 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Screenshots (correct sizes based on devices) 
-
- 
- 
-Reserved for logo 
-
-
-  
-     
 Have questions about this mobile app project? Speak to a mobile expert today: 
 Jivtesh Singh Chahal
- jivteshchahal@gmail.com
+jivteshchahal@gmail.com
+
+Licence : Ask jivteshchahal@gmail.com
